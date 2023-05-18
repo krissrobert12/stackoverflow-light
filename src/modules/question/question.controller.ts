@@ -21,7 +21,7 @@ export const getQuestions = catchAsync(async (req: Request, res: Response) => {
   }
 
   if (filters.query) {
-    findQuery['title'] = { $contains: filters.title.toLowerCase() };
+    findQuery['title'] = { $contains: filters.query.toLowerCase() };
   }
 
   const result = await Question.find(filters);
