@@ -3,6 +3,7 @@ import { objectId } from '../validate/custom.validation';
 
 const createQuestionBody = {
   title: Joi.string().required(),
+  user: Joi.string().required(),
   // thread does not exist yet
 };
 

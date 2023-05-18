@@ -9,6 +9,11 @@ const questionSchema = new mongoose.Schema<IQuestionDoc, IQuestionModel>(
       required: true,
       trim: true,
     },
+    user: {
+      type: String,
+      ref: 'User',
+      required: true,
+    },
     thread: [
       {
         type: String,
