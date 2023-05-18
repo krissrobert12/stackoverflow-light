@@ -5,6 +5,7 @@ import catchAsync from '../utils/catchAsync';
 import ApiError from '../errors/ApiError';
 import pick from '../utils/pick';
 import Question from './question.model';
+import { Comment, commentInterfaces } from '../comment';
 
 export const createQuestion = catchAsync(async (req: Request, res: Response) => {
   const question = await Question.create(req.body);
@@ -55,3 +56,29 @@ export const deleteQuestion = catchAsync(async (req: Request, res: Response) => 
     res.status(httpStatus.NO_CONTENT).send();
   }
 });
+
+export const addComment = catchAsync(
+  async (
+    req: Request<{ questionId?: string }, unknown, { comment?: Partial<commentInterfaces.IComment> }>,
+    res: Response
+  ) => {
+    if (typeof req.params.questionId === 'string') {
+      const questionId = new mongoose.Types.ObjectId(req.params.questionId);
+      const question = await Question.findById(questionId);
+      if (!question) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'Question not found!');
+      }
+
+      const { comment: commentPayload } = req.body;
+      if (!commentPayload) {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Comment not found!');
+      }
+
+      const comment = await Comment.create(commentPayload);
+      question.thread.push(comment._id.toString());
+      await question.save();
+
+      res.send(question);
+    }
+  }
+);

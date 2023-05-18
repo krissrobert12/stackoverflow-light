@@ -40,3 +40,12 @@ export const deleteQuestion = {
     questionId: Joi.string().custom(objectId),
   }),
 };
+
+export const addComment = {
+  params: Joi.object().keys({
+    questionId: Joi.required().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    comment: Joi.object().required(),
+  }),
+};

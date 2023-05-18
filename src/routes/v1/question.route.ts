@@ -16,6 +16,10 @@ router
   .patch(auth('generic'), validate(questionValidation.updateQuestion), questionController.updateQuestion)
   .delete(auth('generic'), validate(questionValidation.deleteQuestion), questionController.deleteQuestion);
 
+router
+  .route('/:questionId/addComment')
+  .post(auth('generic'), validate(questionValidation.addComment), questionController.addComment);
+
 export default router;
 
 /**

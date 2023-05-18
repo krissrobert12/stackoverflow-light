@@ -1,7 +1,7 @@
 ## Stackoverflow Light - Backend
 
 ### Functional requirements
-- [ ] The app should make it possible to ask questions and allow other users to answer them
+- [x] The app should make it possible to ask questions and allow other users to answer them
 - [x] People can upvote or downvote questions (Patch)
 - [ ] The most popular questions are at the top. You can define your own definition of popularity.
 - [x] When opening the application, the user expects to see a list of questions asked. Questions should also visualize the number of answers & votes.
