@@ -12,9 +12,19 @@ const questionSchema = new mongoose.Schema<IQuestionDoc, IQuestionModel>(
     thread: [
       {
         type: String,
-        ref: 'Reply',
+        ref: 'Comment',
       },
     ],
+    upVotes: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
+    downVotes: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
   },
   {
     timestamps: true,
